@@ -69,6 +69,11 @@ export PATH="$PATH:$GOPATH/bin"
 # Wine aliases
 alias winbox="wine $HOME/Software/winbox.exe"
 
+# OSX only aliases
+if [ "$(uname -s)" = "Darwin" ]; then
+	alias ls="ls -G"
+fi
+
 # Linux only aliases
 if [ "$(uname -s)" = "Linux" ]; then
 	alias ls="ls --color"
@@ -82,9 +87,11 @@ else
 fi
 
 # diagnostic pings
-alias ping="ping -OD"
+# alias ping="ping -OD"
 
 alias mmv='noglob zmv -W'
+
+alias scout='python /Users/bcw1980/Projects/scout/scout.py'
 
 function randompassword() {
 cd $HOME/Projects/random_word_password/moonscript;
@@ -97,7 +104,11 @@ alias rp="randompassword"
 alias signup="CFG=$HOME/.config/signup.json $GOPATH/src/git.ics-llc.net/802-1x/signup/signup"
 
 ## Shell Variables
-export EDITOR="gvim -f"
+if [ "$(uname -s)" = "Darwin" ]; then
+	export EDITOR="subl"
+else
+	export EDITOR="gvim -f"
+fi
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 
@@ -115,7 +126,7 @@ export XAUTHORITY=$HOME/.Xauthority
 
 
 # ruby path
-export PATH="$PATH:$HOME/.gem/ruby/2.1.0/bin"
+export PATH="$PATH:$HOME/.gem/bin"
 export GEM_HOME="$HOME/.gem"
 export GEM_PATH="$HOME/.gem"
 export BUNDLE_PATH="$HOME/.gem"
@@ -130,3 +141,8 @@ FDK_EXE="/opt/FDK/Tools/linux"
 PATH=${PATH}:"/opt/FDK/Tools/linux"
 export PATH
 export FDK_EXE
+
+#macports
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
